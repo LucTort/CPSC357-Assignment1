@@ -1,8 +1,16 @@
 import UIKit
-import Foundation
+//import Foundation
 
 /*:
- ## Solution Method
+ # Solution Method
+ 
+ ##The follow will make an invalid email:
+ - More than or less than one @ symbol
+ - No period
+ - Period is not after the @ symbol
+ - Email doesn't have a top level domain (like .com or .edu)
+ 
+ 
  
  - Create a function which takes in a string
  - Convert the string to lowercase for easier parsing
@@ -11,8 +19,6 @@ import Foundation
  - If it passes this test, the function will break the string down into several parts
  
  */
-
-let email = "catsarecute@gmail.com"
 
 func validateEmail(_ input: String) -> Bool
 {
@@ -52,7 +58,7 @@ func validateEmail(_ input: String) -> Bool
     //Split last half further into domain and then .com
     let lastHalfArray = lastHalf.components(separatedBy: ".")
     let domain = lastHalfArray[0]
-    let com = lastHalfArray[1]
+    let topLevelDomain = lastHalfArray[1]
     
     //Verify that domain doesn't contain illegal character @
     if domain.contains("@")
@@ -60,11 +66,17 @@ func validateEmail(_ input: String) -> Bool
         print("Error: Email can't contain more than one @.")
         return false
     }
-    
-    //Verify that domain has a "com" after the dot
-    if com != "com"
+    //Email must have domain
+    if domain == ""
     {
-        print("Error: Email must contain \".com\".")
+        print("Error: Email must have domain.")
+        return false
+    }
+    
+    //Verify that the email has a top level domain
+    if topLevelDomain == ""
+    {
+        print("Error: Email must contain a top level domain.")
         return false
     }
 
@@ -73,4 +85,8 @@ func validateEmail(_ input: String) -> Bool
     return true
 }
 
-validateEmail("cat@derp.com")
+print(validateEmail("Test@em@il.com"))
+print(validateEmail("mail.com"))
+print(validateEmail("mail@.com"))
+print(validateEmail("MAIL@mail."))
+print(validateEmail("MA.IL@mail"))
