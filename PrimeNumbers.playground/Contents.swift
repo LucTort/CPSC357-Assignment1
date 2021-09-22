@@ -1,26 +1,26 @@
 /*:
  ## Solution Method
  
- - Create a function using [Wilson's Theorem] (https://brilliant.org/wiki/wilsons-theorem/)
+ - Create a function using [Wilson's Theorem](https://brilliant.org/wiki/wilsons-theorem/)
  - Call the function and pass in variable to be evaluated
+ - Note: This solution ended up being less efficient than the naive solution because the factorials get so large.
  
  ## Psuedocode
  
  
  
- CheckPrime(int n) -> Boolean
- {
- The following code turned out to be incorrect, because I was reading the math equation incorrectly. The actual solution if statement is: (factorial(n - 1) + 1) % n) == 0
-    if (n−1)! ≡−1(modn) (n-1)! \equiv -1 \pmod {n} (n−1)!≡−1(mod n).  (https://brilliant.org/wiki/wilsons-theorem/)
-    {
-        return True
-    }
+ CheckPrime(int n) -> Boolean\
+ {\
+ //The following code turned out to be incorrect, because I was reading the math equation incorrectly. The actual solution if statement is: (factorial(n - 1) + 1) % n) == 0\
+    if (n−1)! ≡−1(modn) (n-1)! \equiv -1 \pmod {n} (n−1)!≡−1(mod n).  (https://brilliant.org/wiki/wilsons-theorem/)\
+    {\
+        return True\
+    }\
  }
  
  CheckPrime(numberInput)
  
- ## Please note that this only goes up to 21 because the factorial for the computation gets very large very quickly
- I used 64 bit usigned integers for the data type, but even that is not enough to contain the factorials
+ - Note: This only goes up to 21 because the factorial for the computation gets very large very quickly. I used 64 bit usigned integers for the data type, but even that is not enough to contain the factorials.
  
  Please note I use the underscore "_" in functions to override the need to provide an external name
  */
@@ -29,7 +29,7 @@ import UIKit
 
 //function taken from https://stackoverflow.com/questions/33666197/how-to-calculate-the-21-21-factorial-in-swift
 //I use an unsigned int so that it doesn't try to calcualte a negative factorial
-func factorial(_ n: UInt) -> UInt64
+func factorial(_ n: UInt) -> UInt64 //I use the unsigned 64 bit int because factorials get large quickly
 {
     if(n == 0)
     {
@@ -37,7 +37,7 @@ func factorial(_ n: UInt) -> UInt64
     }
         
     var total : UInt64 = 1
-    for i in 1...n
+    for i in 1...n //I chose to use a for loop becuase it was best to loop a predetermined number of times while providing an incrementing value
     {
         total *= UInt64(i)
     }
@@ -61,10 +61,10 @@ func CheckPrime(_ n: Int) -> Bool
 
 //Using a constant here to save memory
 //This only goes up to 21 before it breaks. I think this is because the factorial numbers to too large after that point.
-let cap : Int = 21
+let cap : Int = 21 //The maximum factorial to be calculated
 
 
-for i : Int in 1...cap
+for i : Int in 1...cap //I chose to use a for loop becuase it was best to loop a predetermined number of times while providing an incrementing value
 {
     print("Is \(i) prime: \(CheckPrime(i))")
 }
